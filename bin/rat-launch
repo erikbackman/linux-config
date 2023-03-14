@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+frame=`ratpoison -c curframe`
+cmd=`j4-dmenu-desktop --no-generic --dmenu="dmenu -i -nb '#121212' -sf '#000' -sb '#c7ccd1' -l 10 -fn 'iosevka'"`
+if [[ -z "$cmd" ]]; then
+    exit 0
+fi
+
+if [[ "$frame" -eq "1" ]]; then
+    ratpoison -c 'gmove main'
+else
+    ratpoison -c 'gmove default'
+fi
+exit 0
+

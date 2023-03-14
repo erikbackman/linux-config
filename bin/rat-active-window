@@ -1,0 +1,12 @@
+#!/usr/bin/env perl
+
+use warnings; no warnings 'experimental';
+use strict;
+use v5.10;
+
+my @windows = `ratpoison -c 'windows %s:%t'`;
+my $active = (grep(/\*/, @windows))[0];
+
+$active =~ s/\*://g;
+
+print $active;

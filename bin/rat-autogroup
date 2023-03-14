@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+frame=`ratpoison -c curframe`
+if [[ "$frame" -eq "1" ]]; then
+    ratpoison -c 'gselect main'
+else
+    ratpoison -c 'gselect default'
+fi
+    
+

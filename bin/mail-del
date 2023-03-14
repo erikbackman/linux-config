@@ -1,0 +1,16 @@
+# -*- mode:sh -*-
+#!/bin/sh
+readarray mail <<< $(notmuch search --output=files tag:deleted)
+
+#echo ${mail[0]}
+read -p "${#mail[@]} mails will be deleted, are you sure? [y/n] "
+echo
+
+case "$REPLY" in
+    y|Y )
+	for m in "${mail[@]}"; do
+	    rm -i $m
+	done
+        notmuch new;;
+    n|N ) echo "Ok then";;
+esac

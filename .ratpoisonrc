@@ -1,0 +1,116 @@
+# -*- mode: ratpoisonrc -*-
+
+## prefix-key
+escape C-comma
+
+## autostart
+exec xsetroot -cursor_name left_ptr
+exec xsetroot -solid "#141414"
+exec setxkbmap se
+exec xset r rate 150 25
+exec picom
+exec ratpoison -c banish
+
+exec cat ~/.config/ratpoison/frameconfig | xargs -I{} ratpoison -c "frestore {}"
+
+## aliases
+alias emacs exec emacs
+alias emacsc exec ~/.local/bin/ec
+alias agenda exec ratpoison -c "fselect 0" && ratpoison -c 'exec emacs --eval "(progn (org-agenda-list) (delete-other-windows))"'
+alias browser exec chromium-bin
+alias mupdf exec mupdf
+alias sshot exec import -window root png:$HOME/Pictures/Screenshots/ratpoison-$(date +%s)$$.png && ratpoison -c "echo Screenshot saved"
+alias suspend exec loginctl suspend
+
+## hooks
+addhook switchframe exec ~/.local/bin/rat-autogroup
+
+## settings
+set startupmessage 0
+set winname name
+set wingravity s
+set transgravity center
+set border 0
+set barborder 1
+set barinpadding 0
+set padding 0 0 0 0
+set barpadding 10 4
+set barinpadding 0
+set inputwidth 300
+set bargravity c
+set mesgwait 4
+set rudeness 15
+set maxsizegravity c
+
+set font "JetBrains Mono:size=12"
+set bgcolor "#141414"
+set fgcolor "#e4e4e4"
+set fgcolor #F5F5F5
+set fwcolor #464362
+set bwcolor #232231
+
+## frame configuration
+alias store-fs1   exec ratpoison -c "setenv fs1 `ratpoison -c 'fdump'`"
+alias restore-fs1 exec ratpoison -c "frestore `ratpoison -c 'getenv fs1'`"
+alias store-fs2   exec ratpoison -c "setenv fs2 `ratpoison -c 'fdump'`"
+alias restore-fs2 exec ratpoison -c "frestore `ratpoison -c 'getenv fs2'`"
+
+## applications etc
+definekey top s-p exec ~/.local/bin/rat-launch
+
+bind q exec ~/.local/bin/rat-search
+bind e emacs
+bind a agenda
+bind b chromium
+bind c xterm
+bind f exec ~/.local/bin/rat-fullscreen
+
+# run apps
+definekey top s-Return exec xterm
+definekey top s-e exec emacsclient -c
+
+definekey top Print sshot
+
+## windows & frames
+bind 1 only
+bind 0 remove
+bind 2 vsplit
+bind 3 hsplit
+
+bind k kill
+bind s swap
+bind w exec ~/.local/bin/rat-win-prompt
+
+bind u undo
+bind U redo
+bind d dedicate
+
+definekey top s-n next
+definekey top s-m prev
+definekey top s-space next
+definekey top s-o fselect
+
+alias focus exec ~/.local/bin/rat-focus
+
+definekey top s-h focus left
+definekey top s-j focus down
+definekey top s-k focus up
+definekey top s-l focus right
+
+definekey top s-h focusleft
+definekey top s-j focusdown
+definekey top s-k focusup
+definekey top s-l focusright
+
+definekey top F1 select emacs
+definekey top F2 select chromium
+definekey top F3 select xterm
+
+definekey top F12 exec ratpoison -c "hsplit 1/3" -c focusright -c "hsplit 2/3"
+
+## groups
+gnew main
+bind M-F1 gmove 0
+bind M-F2 gmove 1
+bind M-F3 gmove 3
+bind g exec ~/.local/bin/ratgroup &

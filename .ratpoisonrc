@@ -97,11 +97,6 @@ definekey top s-j focus down
 definekey top s-k focus up
 definekey top s-l focus right
 
-definekey top s-h focusleft
-definekey top s-j focusdown
-definekey top s-k focusup
-definekey top s-l focusright
-
 definekey top F1 select emacs
 definekey top F2 select chromium
 definekey top F3 select xterm

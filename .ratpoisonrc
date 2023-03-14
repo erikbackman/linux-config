@@ -14,9 +14,9 @@ exec ratpoison -c banish
 exec cat ~/.config/ratpoison/frameconfig | xargs -I{} ratpoison -c "frestore {}"
 
 ## aliases
-alias emacs exec emacs
+alias emacs exec emacs --eval "(set-frame-name \"emacs\")"
 alias emacsc exec ~/.local/bin/ec
-alias agenda exec ratpoison -c "fselect 0" && ratpoison -c 'exec emacs --eval "(progn (org-agenda-list) (delete-other-windows))"'
+alias agenda exec ratpoison -c "fselect 0" && ratpoison -c 'exec emacs --eval "(progn (org-agenda-list) (delete-other-windows) (set-frame-name \"agenda\"))"'
 alias browser exec chromium-bin
 alias mupdf exec mupdf
 alias sshot exec import -window root png:$HOME/Pictures/Screenshots/ratpoison-$(date +%s)$$.png && ratpoison -c "echo Screenshot saved"
@@ -27,7 +27,7 @@ addhook switchframe exec ~/.local/bin/rat-autogroup
 
 ## settings
 set startupmessage 0
-set winname name
+set winname title
 set wingravity s
 set transgravity center
 set border 0

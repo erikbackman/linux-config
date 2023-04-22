@@ -9,7 +9,7 @@ if [ "$cwin" = "emacs" ]; then
 	ratpoison -c "focus$dir"
     fi
 else
-    ratpoison -c "focus$dir"    
+    ratpoison -c "focus$dir"
 fi
 
 exit 0

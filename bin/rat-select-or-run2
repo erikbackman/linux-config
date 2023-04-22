@@ -1,0 +1,36 @@
+#!/usr/bin/env perl
+
+# Emulates tabs in ratpoison by creating a new group for each frame a
+# program is launched in.
+
+use strict;
+use warnings;
+use Data::Dumper qw(Dumper);
+
+my $cmd = $ARGV[0];
+my $frame = $ARGV[1];
+
+my %groups;
+foreach (`./rat-groups "%n;%t"`) {
+    my @current = split ";", "$_";
+    $groups{$current[1]} = $current[0];
+}
+
+# If the there is no group with the same name as the current frame, create one and select it.
+if ( exists $groups{/$frame/} ) {
+    my $frm = $groups{$frame};
+    `ratpoison -c "gselect $frm"`;
+} else {
+    `ratpoison -c "gnew $frame"`;
+}
+
+`ratpoison -c "fselect $frame"`;
+# If there exists an already running instance in the current group then focus it, else launch a new one.
+if ( grep(/$cmd/, `ratpoison -c "windows %t"`) ) {
+    `ratpoison -c "select $cmd"`;
+} else {
+    system($cmd);
+}
+
+exit 0;
+

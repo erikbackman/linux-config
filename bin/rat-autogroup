@@ -1,10 +1,14 @@
 #!/bin/env bash
 
 frame=`ratpoison -c curframe`
-if [[ "$frame" -eq "1" ]]; then
-    ratpoison -c 'gselect main'
-else
-    ratpoison -c 'gselect default'
-fi
+ratpoison -c "gselect $frame"
+exit 0
+
+### OLD
+# if [[ "$frame" -eq "1" ]]; then
+#     ratpoison -c 'gselect $curframe'
+# else
+#     ratpoison -c 'gselect default'
+# fi
     
 

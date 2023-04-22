@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cp ~/.crawl-0.29/saves/Jouzoxol.cs ~/backup/

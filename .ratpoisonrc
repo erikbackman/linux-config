@@ -6,33 +6,37 @@ escape C-comma
 ## autostart
 exec xsetroot -cursor_name left_ptr
 exec xsetroot -solid "#141414"
+exec xsetroot -solid "#101010"
 exec setxkbmap se
 exec xset r rate 150 25
 exec picom
 exec ratpoison -c banish
 
-exec cat ~/.config/ratpoison/frameconfig | xargs -I{} ratpoison -c "frestore {}"
+exec cat ~/src/linux-config/ratpoison/layout | xargs -I{} ratpoison -c "frestore {}"
 
 ## aliases
 alias emacs exec emacs --eval "(set-frame-name \"emacs\")"
 alias emacsc exec ~/.local/bin/ec
-alias agenda exec ratpoison -c "fselect 0" && ratpoison -c 'exec emacs --eval "(progn (org-agenda-list) (delete-other-windows) (set-frame-name \"agenda\"))"'
+alias agenda exec ratpoison -c "fselect 0" && ratpoison -c 'exec emacs -q --load "agenda.el"
 alias browser exec chromium-bin
 alias mupdf exec mupdf
 alias sshot exec import -window root png:$HOME/Pictures/Screenshots/ratpoison-$(date +%s)$$.png && ratpoison -c "echo Screenshot saved"
 alias suspend exec loginctl suspend
+alias record exec ~/.local/bin/rat-record
+alias save exec ~/.local/bin/save
 
 ## hooks
-addhook switchframe exec ~/.local/bin/rat-autogroup
+addhook switchframe exec ~/.local/bin/rat-autogroup # when switching frames, switch to a group with the same name.
+addhook key banish
 
 ## settings
 set startupmessage 0
-set winname title
+set winname name
 set wingravity s
 set transgravity center
-set border 0
+set border 1
 set barborder 1
-set barinpadding 0
+set barinpadding 1
 set padding 0 0 0 0
 set barpadding 10 4
 set barinpadding 0
@@ -40,14 +44,17 @@ set inputwidth 300
 set bargravity c
 set mesgwait 4
 set rudeness 15
-set maxsizegravity c
+set maxsizegravity s
 
-set font "JetBrains Mono:size=12"
-set bgcolor "#141414"
-set fgcolor "#e4e4e4"
+set font "JetBrains Mono:size=10"
+#set font "Liberation Mono:size=10"
+set bgcolor #141414
+set fgcolor "#e1e1e1"
 set fgcolor #F5F5F5
-set fwcolor #464362
-set bwcolor #232231
+#set fwcolor #464362
+#set bwcolor #232231
+set fwcolor #1c1c1c
+set bwcolor #1c1c1c
 
 ## frame configuration
 alias store-fs1   exec ratpoison -c "setenv fs1 `ratpoison -c 'fdump'`"
@@ -58,11 +65,13 @@ alias restore-fs2 exec ratpoison -c "frestore `ratpoison -c 'getenv fs2'`"
 ## applications etc
 definekey top s-p exec ~/.local/bin/rat-launch
 
+alias select-or-run exec ~/.local/bin/rat-select-or-run2
+
 bind q exec ~/.local/bin/rat-search
-bind e emacs
-bind a agenda
-bind b chromium
-bind c xterm
+bind e exec emacs
+bind a exec ~/.local/bin/rat-agenda
+bind c exec ratpoison -c "select-or-run xcalc 3"
+bind b exec chromium-bin
 bind f exec ~/.local/bin/rat-fullscreen
 
 # run apps
@@ -80,6 +89,7 @@ bind 3 hsplit
 bind k kill
 bind s swap
 bind w exec ~/.local/bin/rat-win-prompt
+bind g exec ~/.local/bin/rat-group-prompt
 
 bind u undo
 bind U redo
@@ -92,20 +102,25 @@ definekey top s-o fselect
 
 alias focus exec ~/.local/bin/rat-focus
 
-definekey top s-h focus left
-definekey top s-j focus down
-definekey top s-k focus up
-definekey top s-l focus right
+# definekey top s-h focus left
+# definekey top s-j focus down
+# definekey top s-k focus up
+# definekey top s-l focus right
 
-definekey top F1 select emacs
-definekey top F2 select chromium
-definekey top F3 select xterm
+definekey top s-h focusleft
+definekey top s-j focusdown
+definekey top s-k focusup
+definekey top s-l focusright
+
+definekey top F1 select-or-run emacs 1
+definekey top F2 select-or-run chromium-bin 1
+#definekey top F2 exec ratpoison -c "select-or-run chromium-bin 1" -c "ratwarp 1720 50"
+definekey top F3 select-or-run xterm 1
 
 definekey top F12 exec ratpoison -c "hsplit 1/3" -c focusright -c "hsplit 2/3"
 
 ## groups
-gnew main
+#gnew main
 bind M-F1 gmove 0
 bind M-F2 gmove 1
 bind M-F3 gmove 3
-bind g exec ~/.local/bin/ratgroup &

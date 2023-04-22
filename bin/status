@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+while true
+do
+    output="$(date +'%a %b %d %H:%M:%S')"
+    clear
+    echo $output
+    sleep 1;
+done

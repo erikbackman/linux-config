@@ -4,10 +4,10 @@
 (setf *default-package* :stumpwm)
 (load "/home/ebn/quicklisp/setup.lisp")
 
-(run-shell-command "setxkbmap se" nil)
-(run-shell-command "xset r rate 150 25" nil)
-
 (restore-from-file "desktop")
+
+(setf *mode-line-foreground-color* "#000"
+      *mode-line-background-color* "#d3d3d3")
 
 (when *initializing*
   (mode-line))
@@ -63,16 +63,13 @@ This is needed if Sly updates while StumpWM is running"
       *float-window-modifier* :SUPER)
 
 ;;; Applications
-(defmacro my-defapp (name command frame &optional (props))
-   (list 'defcommand name () ()
-     (format nil "Run or raise ~s" name)
-     (list 'sb-thread:make-thread
-       (list 'lambda ()
-	  (list 'run-commands (format nil "fselect ~d" frame))
-	  (list 'run-or-pull command props nil nil)))))
+(defcommand chromium () ()
+  "Run Chromium"
+  (run-or-raise "chromium-bin" '(:role "browser")))
 
-(my-defapp chromium "chromium-bin" 1 '(:class "Chromium"))
-(my-defapp xterm "xterm" 1 '(:class "XTerm"))
+(defcommand term () ()
+  "Run terminal"
+  (run-or-raise "xterm" '(:class "XTerm")))
 
 (defcommand agenda () ()
   "Run Emacs agenda"
@@ -87,16 +84,37 @@ This is needed if Sly updates while StumpWM is running"
   "Run dmenu"
   (run-shell-command "j4-dmenu-desktop --no-generic --dmenu=\"dmenu -i -nb '#121212' -sf '#000' -sb '#c7ccd1' -l 10 -fn 'iosevka'\""))
 
+(defcommand sshot-region () ()
+  "Take screenshto of region"
+  (run-shell-command "maim -s | xclip -selection clipboard -t image/png"))
+
 (define-key *top-map* (stumpwm:kbd "F1") "emacs")
 (define-key *top-map* (stumpwm:kbd "F2") "chromium")
 (define-key *top-map* (stumpwm:kbd "F3") "xterm")
 (define-key *top-map* (stumpwm:kbd "s-o") "fselect")
 (define-key *top-map* (stumpwm:kbd "s-p") "dmenu")
 
+(define-frame-preference "Default"
+  (1 t t :class "Emacs"))
+
+(define-frame-preference "Default"
+  (1 t t :class "chromium-bin-browser-chromium"))
+
+(define-frame-preference "Default"
+  (2 t t :class "XTerm"))
+
+(define-frame-preference "Default"
+  (0 t t :class "XClock"))
+
 ;;; Windows, frames, groups
 (define-key *root-map* (stumpwm:kbd "w") "frame-windowlist")
+(define-key *root-map* (stumpwm:kbd "W") "windowlist")
 (define-key *root-map* (stumpwm:kbd "g") "gselect")
 (define-key *root-map* (stumpwm:kbd "o") "fselect")
+(define-key *root-map* (stumpwm:kbd "c") "calc")
+(define-key *root-map* (stumpwm:kbd "t") "xterm")
+
+(define-key *root-map* (stumpwm:kbd "B") "mode-line")
 
 ;;; Looks
 (setf *window-border-style* :thin)
@@ -105,6 +123,3 @@ This is needed if Sly updates while StumpWM is running"
 (set-focus-color         "#5f9ea0")
 (set-focus-color         "#000000")
 (set-unfocus-color       "#000000")
-
-(setf *mode-line-foreground-color* "#000000"
-      *mode-line-background-color* "#d3d3d3")

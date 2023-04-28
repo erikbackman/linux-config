@@ -73,8 +73,7 @@ This is needed if Sly updates while StumpWM is running"
 
 (defcommand agenda () ()
   "Run Emacs agenda"
-  (run-commands "fselect 2")
-  (run-shell-command "emacs --eval \"(progn (org-agenda-list) (delete-other-windows))\""))
+  (run-shell-command "emacs --name \"agenda\" --eval \"(progn (org-agenda-list) (delete-other-windows))\" "))
 
 (defcommand suspend () ()
   "Call loginctl suspend"
@@ -105,6 +104,9 @@ This is needed if Sly updates while StumpWM is running"
 
 (define-frame-preference "Default"
   (0 t t :class "XClock"))
+
+(define-frame-preference "Default"
+  (2 t t :title "agenda"))
 
 ;;; Windows, frames, groups
 (define-key *root-map* (stumpwm:kbd "w") "frame-windowlist")

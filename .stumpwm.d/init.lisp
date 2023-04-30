@@ -63,35 +63,47 @@ This is needed if Sly updates while StumpWM is running"
       *float-window-modifier* :SUPER)
 
 ;;; Applications
-(defcommand chromium () ()
-  "Run Chromium"
-  (run-or-raise "chromium-bin" '(:role "browser")))
+(defun lookup-or (key list or) (if-let ((kvp (member key list))) (cadr kvp) or))
 
-(defcommand term () ()
-  "Run terminal"
-  (run-or-raise "xterm" '(:class "XTerm")))
+(defmacro my-defapp (name cmd &optional spec)
+  `(defcommand ,name () ()
+     ,(format nil "Run or raise ~s" name)
+     (run-or-raise ,cmd ,spec)))
+
+(my-defapp emacs "emacs --name \"emacs-main\"" '(:title "emacs-main"))
+(my-defapp xterm "xterm" '(:class "XTerm"))
+(my-defapp chromium "chromium-bin" '(:role "browser"))
+(my-defapp xclock "xclock" '(:class "XClock"))
 
 (defcommand agenda () ()
   "Run Emacs agenda"
-  (run-shell-command "emacs --name \"agenda\" --eval \"(progn (org-agenda-list) (delete-other-windows))\" "))
+  (run-or-raise "emacs --name \"agenda\" --eval \"(progn (org-agenda-list) (delete-other-windows))\" "
+		'(:title "agenda")))
 
 (defcommand suspend () ()
   "Call loginctl suspend"
   (run-shell-command "loginctl suspend"))
 
-(defcommand dmenu () ()
-  "Run dmenu"
-  (run-shell-command "j4-dmenu-desktop --no-generic --dmenu=\"dmenu -i -nb '#121212' -sf '#000' -sb '#c7ccd1' -l 10 -fn 'iosevka'\""))
-
 (defcommand sshot-region () ()
   "Take screenshto of region"
   (run-shell-command "maim -s | xclip -selection clipboard -t image/png"))
 
-(define-key *top-map* (stumpwm:kbd "F1") "emacs")
-(define-key *top-map* (stumpwm:kbd "F2") "chromium")
-(define-key *top-map* (stumpwm:kbd "F3") "xterm")
-(define-key *top-map* (stumpwm:kbd "s-o") "fselect")
-(define-key *top-map* (stumpwm:kbd "s-p") "dmenu")
+(defcommand record () ()
+  "Record screen"
+  (run-shell-command "~/src/linux-config/bin/rat-record"))
+
+(define-key *top-map* (kbd "F1") "emacs")
+(define-key *top-map* (kbd "F2") "chromium")
+(define-key *top-map* (kbd "F3") "xterm")
+(define-key *top-map* (kbd "s-o") "fselect")
+(define-key *top-map* (kbd "s-p") "dmenu")
+(define-key *root-map* (kbd "c") "calc")
+(define-key *root-map* (kbd "a") "agenda")
+
+(define-key *top-map* (kbd "s-p")
+  "exec j4-dmenu-desktop --no-generic --dmenu=\"dmenu -i -nb '#121212' -sf '#000' -sb '#c7ccd1' -l 10 -fn 'iosevka'\"")
+
+(define-key *root-map* (kbd "C-l") "xclock")
 
 (define-frame-preference "Default"
   (1 t t :class "Emacs"))
@@ -113,8 +125,6 @@ This is needed if Sly updates while StumpWM is running"
 (define-key *root-map* (stumpwm:kbd "W") "windowlist")
 (define-key *root-map* (stumpwm:kbd "g") "gselect")
 (define-key *root-map* (stumpwm:kbd "o") "fselect")
-(define-key *root-map* (stumpwm:kbd "c") "calc")
-(define-key *root-map* (stumpwm:kbd "t") "xterm")
 
 (define-key *root-map* (stumpwm:kbd "B") "mode-line")
 

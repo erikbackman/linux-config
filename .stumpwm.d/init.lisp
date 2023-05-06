@@ -139,16 +139,30 @@ This is needed if Sly updates while StumpWM is running"
 (defun get-file (path &rest format-arguments)
   (probe-file (uiop:native-namestring (apply 'format nil path format-arguments))))
 
-(define-stumpwm-type :layout (_ prompt)
-  (completing-read (current-screen) prompt '("default" "two-pane" "full")))
+(define-stumpwm-type :layout (input _)
+  (let ((options '(("default" :default)
+		   ("full" :full)))
+	(arg (argument-pop input)))
+    (when arg
+      (or (second (assoc arg options :test #'string=))
+	  (throw 'error "invalid layout")))))
 
-(defcommand my-restore-layout (name) ((:layout "name: "))
-  (save-frame-excursion
-    (if (equal name "full")
-	(only)
+(defcommand my-restore-layout (layout) ((:layout "name: "))
+  (if (equal layout :full)
+      (only)
+      (save-frame-excursion
 	(when-let ((file
-		    (get-file "~~/.local/share/stumpwm/~a.dump" name)))
+		    (get-file "~~/.local/share/stumpwm/~a.dump" (string-downcase layout))))
 	  (restore-from-file file)
 	  (place-existing-windows)))))
+
+(defvar *my-frame-keymap*
+  (let ((m (stumpwm:make-sparse-keymap)))
+    (define-key m (kbd "l") "my-restore-layout")
+    (define-key m (kbd "f") "my-restore-layout full")
+    (define-key m (kbd "d") "my-restore-layout default")
+    m))
+
+(define-key *root-map* (kbd "f") '*my-frame-keymap*)
 
 (my-restore-layout "default")

@@ -4,6 +4,8 @@
 (setf *default-package* :stumpwm)
 (load "/home/ebn/quicklisp/setup.lisp")
 
+(run-shell-command "pgrep picom || picom &")
+
 (defun lookup-or (key list or) (if-let ((kvp (member key list))) (cadr kvp) or))
 
 ;;; Looks
@@ -96,7 +98,7 @@ This is needed if Sly updates while StumpWM is running"
   (run-shell-command "import -window root png:$HOME/Pictures/Screenshots/stumpwm-$(date +%s)$$.png"))
 
 (defcommand sshot-region () ()
-  "Take screenshto of region"
+  "Take screenshot of region"
   (run-shell-command "maim -s | xclip -selection clipboard -t image/png"))
 
 (defcommand record () ()
@@ -125,7 +127,7 @@ This is needed if Sly updates while StumpWM is running"
   (1 t t :class "Emacs"))
 
 (define-frame-preference "Default"
-  (1 t t :class "chromium-bin-browser-chromium"))
+  (1 t t :role "browser"))
 
 (define-frame-preference "Default"
   (2 t t :class "XTerm"))

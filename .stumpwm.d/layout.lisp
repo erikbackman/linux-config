@@ -1,4 +1,5 @@
-(require :stumpwm)
+(in-package :stumpwm)
+(setf *default-package* :stumpwm)
 
 (define-frame-preference "Default"
   (1 t t :class "Emacs"))

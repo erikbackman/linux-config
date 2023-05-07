@@ -1,4 +1,6 @@
-(require :stumpwm)
+(in-package :stumpwm)
+(setf *default-package* :stumpwm)
+
 (ql:quickload :slynk)
 
 (defvar *slynk-port* slynk::default-server-port)

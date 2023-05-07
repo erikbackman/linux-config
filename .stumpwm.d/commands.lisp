@@ -1,4 +1,5 @@
-(require :stumpwm)
+(in-package :stumpwm)
+(setf *default-package* :stumpwm)
 
 (defmacro my-defapp (name cmd &optional spec)
   `(defcommand ,name () ()

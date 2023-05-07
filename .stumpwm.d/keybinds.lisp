@@ -1,5 +1,9 @@
-(require :stumpwm)
+(in-package :stumpwm)
+(setf *default-package* :stumpwm)
 
+(define-key *top-map* (kbd "F1") "emacs")
+(define-key *top-map* (kbd "F2") "chromium")
+(define-key *top-map* (kbd "F3") "xterm")
 (define-key *top-map* (kbd "s-o") "fselect")
 (define-key *top-map* (kbd "s-p") "dmenu")
 (define-key *root-map* (kbd "c") "calc")

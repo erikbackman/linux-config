@@ -1,0 +1,22 @@
+
+[app] (name=fbrun)
+  [Position] (WINCENTER) {0 0}
+  [Deco]                 {Border}
+  [Layer]                {2}
+[end]
+
+[app] (name=emacs)
+  [Dimensions]	{2000 1400}
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{8}
+  [Workspace]   {1}
+  [Jump]        {yes}
+[end]
+
+[group]
+  [app](name=emacs)
+  [app](class=xterm)
+[end]
+
+[app] (name=chromium-bin-browser-chromium) (class=Chromium-bin-browser-chromium) (role=browser)
+[end]

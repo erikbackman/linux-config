@@ -1,0 +1,16 @@
+[database]
+path=/home/ebn/.mail
+
+[user]
+name=
+primary_email=
+
+[new]
+tags=new;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true

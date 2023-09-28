@@ -1,0 +1,22 @@
+IMAPAccount mailbox
+Host imap.mailbox.org
+UserCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.authinfo.gpg | awk -F ' ' '/mailbox/ { print $(NF-2); exit; }'"
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.authinfo.gpg | awk -F ' ' '/mailbox/ { print $(NF); exit; }'"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mailbox-remote
+account mailbox
+
+MaildirStore mailbox-local
+SubFolders Verbatim
+Path ~/.mail/mailbox/
+Inbox ~/.mail/mailbox/Inbox
+
+Channel mailbox
+Far :mailbox-remote:
+Near :mailbox-local:
+Create Both
+Expunge Both
+SyncState *
+Sync All

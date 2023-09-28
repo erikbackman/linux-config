@@ -85,8 +85,8 @@ Mod4 space :RootMenu
 Control Mod1 Delete :Exit
 
 # change to previous/next workspace
-Mod4 comma :PrevWorkspace
-Mod4 period :NextWorkspace
+Mod4 comma :Workspace 1
+Mod4 period :Workspace 2
 
 # send the current window to previous/next workspace
 Mod1 Shift Left :SendToPrevWorkspace

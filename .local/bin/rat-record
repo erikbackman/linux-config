@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [ ! "$(pidof ffmpeg)" ]; then
+    now=`date +%s`
+#    ratpoison -c "echo recording started"
+    # ffmpeg -framerate 30 -f x11grab -video_size 3440x1440 -i :0.0+0,0 -c:a aac -c:v libx264 "/home/ebn/Videos/ratrecord-$now.mp4"
+    # ffmpeg \
+    # 	-i input.mp4 \
+    # 	-crf 10 \
+    # 	-vf "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" \
+    # 	"/home/ebn/Videos/ratrecord-$now.mp4"
+
+    ffmpeg \
+	-i input.mp4 \
+	-crf 10 \
+	-preset ultrafast \
+	-filter:v tblend -r 60 \
+	-probesize 45M \
+	"/home/ebn/Videos/ratrecord-$now.mp4"
+
+else
+    pkill ffmpeg
+#    ratpoison -c "echo recording stopped"
+fi

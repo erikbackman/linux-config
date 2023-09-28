@@ -1,0 +1,5 @@
+media-libs/mesa -wayland
+x11-libs/gtk+ -wayland
+www-client/librewolf -wayland
+www-client/librewolf-bin -wayland
+media-libs/libvpx postproc

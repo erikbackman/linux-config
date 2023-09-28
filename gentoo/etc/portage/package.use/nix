@@ -1,0 +1,15 @@
+# required by sys-apps/nix-2.10.3::nix-guix
+# required by nix (argument)
+>=dev-libs/boost-1.79.0 context
+# required by sys-apps/nix-2.10.3::nix-guix[gc]
+# required by nix (argument)
+>=dev-libs/boehm-gc-8.0.6 cxx
+# required by sys-apps/busybox-nix-sandbox-shell-1.35.0::nix-guix
+# required by sys-apps/nix-2.10.3::nix-guix
+# required by nix (argument)
+>=virtual/libcrypt-2 static-libs
+# required by virtual/libcrypt-2::gentoo
+# required by sys-apps/busybox-nix-sandbox-shell-1.35.0::nix-guix
+# required by sys-apps/nix-2.10.3::nix-guix
+# required by nix (argument)
+>=sys-libs/libxcrypt-4.4.28-r1 static-libs

@@ -1,0 +1,2 @@
+app-text/texlive luatex l10n_sv
+>=app-text/texlive-core-2021-r1 xetex

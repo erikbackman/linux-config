@@ -1,0 +1,2 @@
+media-plugins/alsa-plugins pulseaudio
+media-video/ffmpeg vaapi # for Video Acceleration

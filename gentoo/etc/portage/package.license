@@ -1,0 +1,18 @@
+sys-kernel/linux-firmware linux-fw-redistributable no-source-code
+sys-firmware/intel-microcode intel-ucode
+x11-drivers/nvidia-drivers NVIDIA-r2
+
+net-im/discord-bin all-rights-reserved
+# move net-im/discord-bin net-im/discord
+net-im/discord all-rights-reserved
+net-im/discord all-rights-reserved
+
+games-util/steam-launcher ValveSteamLicense
+
+media-sound/spotify Spotify
+
+media-fonts/font-bh-ttf bh-luxi
+
+sci-mathematics/geogebra-bin CC-BY-NC-SA-3.0 Geogebra colt
+
+net-misc/dropbox CC-BY-ND-3.0 dropbox

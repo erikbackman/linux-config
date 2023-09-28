@@ -5,14 +5,14 @@
 
 (load "/home/ebn/quicklisp/setup.lisp")
 
-(load "~/.stumpwm.d/server.lisp")
+;;(load "~/.stumpwm.d/server.lisp")
 (load "~/.stumpwm.d/theme.lisp")
 (load "~/.stumpwm.d/modeline.lisp")
 (load "~/.stumpwm.d/commands.lisp")
 (load "~/.stumpwm.d/keybinds.lisp")
 (load "~/.stumpwm.d/layout.lisp")
 
-(run-shell-command "pgrep picom || picom &")
+;;(run-shell-command "pgrep picom || picom &")
 
 (set-prefix-key (stumpwm:kbd "C-comma"))
 

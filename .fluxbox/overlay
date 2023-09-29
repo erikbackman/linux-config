@@ -3,3 +3,4 @@
 
 ! *font: Input Mono
 ! window*font: Fantasque Sans Mono-12:bold
+window.title.height:                 24

@@ -317,8 +317,8 @@ Style "gkrellm" !Title, !Borders, Sticky, WindowSkipList
 #      12 - Module ActiveButton (Mouse Hover)
 #      13 - FvwmPager Active Page
 #      14 - FvwmIconMan Iconified Button
-Colorset 1 fg #f3e7d4, bg Gray40
-Colorset 2 fg #f3e7d4, bg "#36414d"
+Colorset 1 fg #f5eada, bg Gray40
+Colorset 2 fg #f5eada, bg "#36414d"
 Colorset 3 fg white, bg Gray40
 Colorset 4 fg white, bg "#36414d"
 Colorset 5  fg #000000, bg #EEDCC1, hi, sh, Plain, NoShape
@@ -724,6 +724,8 @@ DestroyModuleConfig FvwmButtons: *
 
 *FvwmButtonsFore #f5eada
 *FvwmButtonsBack #36414d
+#*FvwmButtonsFore black
+#*FvwmButtonsBack gray
 
 *FvwmButtonsFont "xft:terminus:bold:pixelsize=14:antialias=True"
 #*FvwmButtonsGeometry 64x420+0+0

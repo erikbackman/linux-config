@@ -1,8 +1,0 @@
-#!/bin/env bash
-
-groups=`ratpoison -c "groups" | sed -z 's/\n/ | /g'`
-selected="$(ratpoison -c "prompt $groups: ")"
-if [[ ! -z "$selected" ]]; then
-    ratpoison -c "gselect $selected"
-fi
-exit 0;

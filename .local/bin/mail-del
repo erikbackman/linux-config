@@ -2,7 +2,6 @@
 #!/bin/sh
 readarray mail <<< $(notmuch search --output=files tag:deleted)
 
-#echo ${mail[0]}
 read -p "${#mail[@]} mails will be deleted, are you sure? [y/n] "
 echo
 

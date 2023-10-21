@@ -1,8 +1,0 @@
-#!/bin/env bash
-
-windows=`ratpoison -c "windows (%n) %s%a" | sed -z 's/\n/ | /g'`
-selected="$(ratpoison -c "prompt $windows: " | cut -b 2)"
-if [[ ! -z "$selected" ]]; then
-    ratpoison -c "select $selected"
-fi
-exit 0;

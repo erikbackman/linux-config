@@ -1,0 +1,42 @@
+{
+  MenuTitleBack = (solid, "#36414d");
+  MenuTitleColor = "lightgray";
+
+  MenuTextBack = (solid, "#a8a8a8");
+  MenuDisabledColor = "#999999";
+  MenuTextFont = "Terminus,Sans:slant=0:weight=120:width=100:pixelsize=14";
+  MenuTextColor = "#000";
+
+  HighlightColor = "#cdcdcd";
+  HighlightTextColor = "#000";
+ 
+  WindowTitleFont = "Terminus,Sans:slant=0:weight=150:width=100:pixelsize=14";
+  FTitleColor = "lightgray";
+  FTitleBack = (solid, "#36414d");
+
+  UTitleColor = "#000000";
+  UTitleBack = (solid, "darkgray");
+
+  ClipTitleFont = "Terminus,Sans:slant=0:weight=200:width=100:pixelsize=10";
+  ClipTitleColor = "#f5eada";
+
+  IconTitleColor = "#f5eada";
+  IconBack = (solid, "#5e6771");
+  IconTitleFont = "Terminus,Sans:pixelsize=12";
+ 
+  IconTitleBack = "#20272e";
+  LargeDisplayFont = "Droid Sans,Sans:pixelsize=24";
+  CClipTitleColor = gray20;
+  MenuStyle = normal;
+  ResizebarBack = (solid, "#999999");
+  DisplayFont = "Terminus:pixelsize=14";
+  TitleJustify = center;
+  MenuTextExtendSpace = 0;
+  PTitleBack = (solid, "#36414d");
+  MenuTitleFont = "Terminus,Sans:bold:pixelsize=14";
+  WindowTitleExtendSpace = 0;
+  NormalCursor = (builtin, left_ptr);
+  PTitleColor = "#000";
+  MenuTitleExtendSpace = 0;
+  WorkspaceBack = (solid, "#36404e");
+}

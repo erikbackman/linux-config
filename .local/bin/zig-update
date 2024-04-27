@@ -19,7 +19,7 @@ if [ -n "$url" ]; then
 
 		wget -O "/tmp/$(basename $url)" "$url"
 		wget -O "/tmp/$(basename $url).minisig" "$url.minisig"
-        minisign -q -V -m $archive -P $pkey
+		minisign -q -V -m $archive -P $pkey
 
 		if [ $? -eq 1 ]; then
 				echo "Signature verifcation failed"

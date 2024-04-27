@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+pkey="RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U"
+
+url="$(curl -v --silent 'https://ziglang.org/download/' --stderr - \
+		| sed 's/<\/td>/\n/g' \
+		| grep 'zig-linux-x86_64' \
+		| head -1 \
+		| sed -r 's/<td><a href=(.*)>.+/\1/')"
+if [ -n "$url" ]; then
+		archive="/tmp/$(basename $url)"
+		sig="$archive.minisig"
+		output="$HOME/opt/$(basename $archive | sed 's/.tar.xz//')"
+
+		if [ -d "$output" ]; then
+				echo "Up to date.."
+				exit 0
+		fi
+
+		wget -O "/tmp/$(basename $url)" "$url"
+		wget -O "/tmp/$(basename $url).minisig" "$url.minisig"
+        minisign -q -V -m $archive -P $pkey
+
+		if [ $? -eq 1 ]; then
+				echo "Signature verifcation failed"
+				exit 1
+		else
+				echo "Installing.."
+				tar -xf "$archive" -C "$HOME/opt/"
+				if [ $? -eq 0 ]; then
+						ln -sf "$output/zig" "$HOME/.local/bin/zig" 
+				fi
+				echo "Done"
+		fi
+fi

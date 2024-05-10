@@ -15,7 +15,8 @@ set wildmode=longest:full,full
 set autochdir
 
 g:mapleader = " "
-nnoremap <leader>. :tag<CR>
+nnoremap <leader>t :tag<space>
+nnoremap <leader>. <C-]><CR>
 inoremap <C-i> <C-x><C-]>
 nnoremap <leader>bd :bp\|bd #<CR>
 nnoremap <leader>bb :e #<CR>

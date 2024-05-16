@@ -1,0 +1,49 @@
+color activeborder "#f4bf75"
+vtile 50
+htile 90
+
+bind-mouse 4-1  window-move
+bind-mouse 4-3  window-resize
+
+bind-key CM-q   quit
+bind-key CM-r 	restart
+bind-key 4-k	window-vmaximize
+bind-key 4-m	window-maximize
+bind-key 4-f    window-fullscreen
+
+bind-key 4-t window-vtile
+bind-key 4S-t window-htile
+bind-key 4-l window-snap-right
+unbind-key 4-h
+bind-key 4-h window-snap-left
+
+bind-key 4-comma window-cycle-ingroup
+
+# Toggle visibility of group n, hiding all other groups
+bind-key M-1    group-only-1
+bind-key M-2    group-only-2
+bind-key M-3    group-only-3
+
+# Toggle group n's visibility, without hiding active group
+bind-key F1   group-toggle-1
+bind-key F2   group-toggle-2
+bind-key F3   group-toggle-3
+
+# Move window to group n
+bind-key CM-1   window-movetogroup-1
+bind-key CM-2   window-movetogroup-2
+bind-key CM-3   window-movetogroup-3
+#bind-mouse C4-1  window_resize
+
+# application menu
+command firefox firefox
+command st st
+command off "sudo poweroff"
+
+# groups predefined, use xprop to get these from each program
+autogroup 1     "st-256color,st-256color"
+autogroup 2     "Navigator","Firefox" 
+autogroup 2     "Navigator, firefox-default"
+
+# inherit current selected group
+# sticky no

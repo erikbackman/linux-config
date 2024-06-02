@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+xbps-install -Su void-repo-nonfree
+xbps-install -S \
+	     intel-ucode \
+	     xf86-video-intel-2.99.917.20210115_2 \
+	     intel-video-accel \
+	     thermald \
+	     tlp \
+	     nvme-cli \
+	     cronie \
+	     tmux \
+	     vim-x11 \
+	     xorg-minimal \
+	     freefont-ttf-20120503_8 \
+	     ttf-opensans \
+	     xorg-fonts
+
+
+

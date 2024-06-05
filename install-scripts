@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+INSTALL_DIR="$HOME/.local/bin"
+
+for file in `ls .local/bin`
+do
+		ln -s "$PWD/.local/bin/$file" "$INSTALL_DIR/$file"
+done

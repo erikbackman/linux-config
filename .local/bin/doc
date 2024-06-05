@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ls Documents/*pdf | dmenu | xargs -I{} firefox '{}'

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+MUSIC_SESSION=`tmux ls -F "#{session_name}" | grep music`
+if [[ -z "$MUSIC_SESSION" ]]; then
+		tmux new-session -d -t "music" 
+		tmux send-keys -t "music" "mpv https://wr03-ice.stream.khz.se/wr03_mp3" Enter
+else
+		tmux send-keys -t "music" Space
+fi

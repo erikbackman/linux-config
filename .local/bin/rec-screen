@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ffmpeg -framerate 60 -f x11grab -s 2560x1440 -i :0.0 -c:v libx264 rec.mkv
+#ffmpeg -framerate 24 -f x11grab -thread_queue_size 1024 -i :0.0 -f pulse -ac 2 -i default -c:v libx264 -acodec libmp3lame -crf 0 -preset ultrafast -b:a 64k -t 20 rec.mkv

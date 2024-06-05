@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+my $root=`git rev-parse --show-toplevel`;
+chomp $root;
+my $result=`git grep -n  "" | fzf`;
+my @a = split(/:/, $result);
+my $cmd = sprintf ":e %s/%s|:%s", $root, $a[0],$a[1];
+#print $cmd
+`tmux send-keys "$cmd" Enter`

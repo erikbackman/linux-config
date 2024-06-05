@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ACTIVE=`tmux list-panes -F '#{pane_id}' | grep active`
+tmux kill-pane -a -t "$ACTIVE"

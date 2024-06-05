@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+root=$(git rev-parse --show-toplevel)
+selected=$(git ls-files | fzf --no-color)
+path="$root/$selected"
+if [[ -n $selected ]]; then
+		tmux send-keys ":e $path" Enter 
+fi

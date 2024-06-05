@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+j4-dmenu-desktop --dmenu="dmenu -fn 'RecMonoDuotone-14' -i -sb '#222222' -sf '#f4bf75' -nb '#333333' -p 'run:'" &

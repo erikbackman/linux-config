@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+time=$(date "+%a %b %d, %T");
+bat_status="$(cat /sys/class/power_supply/BAT0*/status | grep Charging)";
+if [[ -n $bat_status ]]; then
+		bat_status="Charging"
+else
+		bat_status="Discharging"
+fi
+bat0_capacity="$(cat /sys/class/power_supply/BAT0/capacity)";
+bat1_capacity="$(cat /sys/class/power_supply/BAT0/capacity)";
+
+printf -v status "%s\n%s (%s, %s)" "$time" "$bat_status" "$bat0_capacity" "$bat1_capacity"
+notify-send -t 3000 "$status" 

@@ -65,29 +65,6 @@ snoremap ö <esc>
 cnoremap ö <C-C>
 onoremap ö <esc>
 
-def MyGrep(pattern: string): void
-		#set path=$'{$PWD}'
-		set wildignore=*/zig-cache/*
-		const root = trim(system('git rev-parse --show-toplevel'))
-		const path = $'{root}/**/*.zig'
-
-		execute $'vimgrep {pattern} {path}'
-enddef
-
-def GGrep(): void
-		const root = trim(system('git rev-parse --show-toplevel'))
-		const f = expand('%:p')	
-		#echo $'!git grep -n "" {root}/{f} | fzf'
-
-		put execute($'!grep -n "" {f} | fzf')
-		execute $'echo {result}'
-		redraw!
-enddef
-command! -nargs=0 GGrep GGrep()
-
-command! -nargs=1 MyGrep MyGrep("<args>")
-nnoremap <leader>gg :MyGrep<space>
-
 def FollowLink(): void
 		const link = expand('<cWORD>')
 		call system($'firefox {link}')

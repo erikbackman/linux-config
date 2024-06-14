@@ -8,11 +8,28 @@ set t_Co=256
 syntax enable
 colorscheme citrus
 
-set tabstop=4
+set mouse=n
+set ttymouse=xterm2
+
+set tabstop=8
+set expandtab
+set shiftwidth=4
+set autoindent
+set smartindent
+set cindent
+
 set relativenumber
+
 set wildmenu
 set wildmode=longest:full,full
+set wildchar=<Tab>
+#set wildoptions=pum
+set wildignore=*~,#*#,*.sw?,*.o,*.class,.viminfo,*.pdf,*.mp3,*.gz,*.tgz,*.gif,*.jpg,*.png
+
 set autochdir
+set timeoutlen=300
+
+set tags=./tags;,tags;
 
 g:mapleader = " "
 inoremap <C-i> <C-x><C-]>
@@ -28,7 +45,10 @@ nnoremap <leader>cc :Make<CR>
 nnoremap <leader>df 0dt{d%
 nnoremap <leader>s :w<CR>
 
-au BufReadPost *.zig nnoremap <leader>cr :Dispatch zig build run<CR>
+au BufReadPost *.zig nnoremap <leader>cr :Dispatch! zig build run<CR>
+au BufReadPost *.zig {
+		:iabbrev print! std.debug.print("", .{})
+}
 
 set incsearch
 augroup vim-incsearch-highlight
@@ -37,7 +57,6 @@ augroup vim-incsearch-highlight
 		autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
-inoremap jk <esc>
 nnoremap ö <esc>
 inoremap ö <esc>
 vnoremap ö <esc>
@@ -55,6 +74,17 @@ def MyGrep(pattern: string): void
 		execute $'vimgrep {pattern} {path}'
 enddef
 
+def GGrep(): void
+		const root = trim(system('git rev-parse --show-toplevel'))
+		const f = expand('%:p')	
+		#echo $'!git grep -n "" {root}/{f} | fzf'
+
+		put execute($'!grep -n "" {f} | fzf')
+		execute $'echo {result}'
+		redraw!
+enddef
+command! -nargs=0 GGrep GGrep()
+
 command! -nargs=1 MyGrep MyGrep("<args>")
 nnoremap <leader>gg :MyGrep<space>
 
@@ -62,6 +92,7 @@ def FollowLink(): void
 		const link = expand('<cWORD>')
 		call system($'firefox {link}')
 enddef
-
 command! -nargs=0 FollowLink FollowLink()
 nnoremap <leader>gl :FollowLink<CR>
+
+nnoremap <leader>sp :r ~/.vim/snippets/zig-print<CR>

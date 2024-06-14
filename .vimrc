@@ -44,18 +44,7 @@ nnoremap <leader>ck :cclose<CR>\|<C-w><C-p>
 nnoremap <leader>cc :Make<CR>
 nnoremap <leader>df 0dt{d%
 nnoremap <leader>s :w<CR>
-
-au BufReadPost *.zig nnoremap <leader>cr :Dispatch! zig build run<CR>
-au BufReadPost *.zig {
-		:iabbrev print! std.debug.print("", .{})
-}
-
-set incsearch
-augroup vim-incsearch-highlight
-		autocmd!
-		autocmd CmdlineEnter /,\? :set hlsearch
-		autocmd CmdlineLeave /,\? :set nohlsearch
-augroup END
+vnoremap ; :s/^/\/\//<CR>
 
 nnoremap ö <esc>
 inoremap ö <esc>
@@ -65,11 +54,22 @@ snoremap ö <esc>
 cnoremap ö <C-C>
 onoremap ö <esc>
 
+au BufReadPost *.zig nnoremap <leader>cr :Dispatch! zig build run<CR>
+au BufReadPost *.zig {
+		:iabbrev print! std.debug.print("", .{})
+}
+
+set incsearch
+augroup vim-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
+
+
 def FollowLink(): void
 		const link = expand('<cWORD>')
 		call system($'firefox {link}')
 enddef
 command! -nargs=0 FollowLink FollowLink()
 nnoremap <leader>gl :FollowLink<CR>
-
-nnoremap <leader>sp :r ~/.vim/snippets/zig-print<CR>

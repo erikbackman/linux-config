@@ -5,6 +5,8 @@ pkey="RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U"
 url="$(curl -v --silent 'https://ziglang.org/download/' --stderr - \
 		| sed 's/<\/td>/\n/g' \
 		| grep 'zig-linux-x86_64' \
+		| head -n 4 \
+		| tail -2 \
 		| head -1 \
 		| sed -r 's/<td><a href=(.*)>.+/\1/')"
 if [ -n "$url" ]; then

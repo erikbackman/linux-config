@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 FILE="$HOME/notes/$1"
-
-if [[ ! -f $FILE ]]; then
-		mkdir -p `dirname $FILE`
-fi
+[[ ! -f $FILE ]] && mkdir -p `dirname $FILE`
 vim $FILE
+
+#if [[ ! -f $FILE ]]; then
+#		mkdir -p `dirname $FILE`
+#fi
+#nvim $FILE

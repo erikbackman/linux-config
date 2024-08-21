@@ -9,6 +9,7 @@ else
 fi
 bat0_capacity="$(cat /sys/class/power_supply/BAT0/capacity)";
 bat1_capacity="$(cat /sys/class/power_supply/BAT0/capacity)";
+cal="$(cal)";
 
-printf -v status "%s\n%s (%s, %s)" "$time" "$bat_status" "$bat0_capacity" "$bat1_capacity"
+printf -v status "%s\n%s (%s, %s)" "$time" "$bat_status" "$bat0_capacity" "$bat1_capacity" 
 notify-send -t 3000 "$status" 

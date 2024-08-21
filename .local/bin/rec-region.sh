@@ -1,6 +1,4 @@
 #!/bin/bash
 
-[ ! "$1" ] && { echo "Usage: $0 filename"; exit 1; }
-
-ffmpeg -framerate 30 -f x11grab $(slop -f "-video_size %wx%h -i :0.0+%x,%y") -c:a aac -c:v libx264 "$1"
+ffmpeg -init_hw_device vaapi=foo:/dev/dri/renderD128 -f x11grab -hwaccel vaapi -hwaccel_device foo -select_region 1 -draw_mouse 1 -framerate 60 -show_region 1 -video_size 1920x1080 -c:v h264 -i :0.0 /home/ebn/output.mp4
 

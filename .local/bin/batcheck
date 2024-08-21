@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for CAP in $(cat /sys/class/power_supply/*/capacity); do
+    if [[ $CAP -gt 5 ]]; then
+        exit 0
+    fi
+done
+notify-send -u critical "LOW BATTERY $CAP"

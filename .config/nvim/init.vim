@@ -1,10 +1,16 @@
-colorscheme base16-gruvbox-dark-hard
+"colorscheme base16-gruvbox-dark-hard
+colorscheme retrobox
 "colorscheme base16-material-darker
 
 set termguicolors
 set relativenumber
 set signcolumn=yes
 set tags=./tags;,tags;
+
+set textwidth=0
+set wrapmargin=0
+set wrap
+set linebreak
 
 set incsearch
 augroup vim-incsearch-highlight

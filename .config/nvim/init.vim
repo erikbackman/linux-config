@@ -1,11 +1,15 @@
 "colorscheme base16-gruvbox-dark-hard
-colorscheme retrobox
+"colorscheme retrobox
+"colorscheme base16-tomorrow-night
+colorscheme base16-default-dark
 "colorscheme base16-material-darker
 
 set termguicolors
 set relativenumber
 set signcolumn=yes
 set tags=./tags;,tags;
+
+set sj=-50
 
 set textwidth=0
 set wrapmargin=0

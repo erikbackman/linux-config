@@ -1,3 +1,4 @@
 *.log*
 .fluxbox/fbrun_history
 .fluxbox/lastwallpaper
+**/**/packager_compiled.lua

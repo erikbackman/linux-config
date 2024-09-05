@@ -7,19 +7,10 @@ return require('packer').startup(function(use)
 			ensure_installed = { "zig", "c", "vimdoc" },
 			auto_install = false,
 			highlight = { 
-				enable = true, 
+				enable = false, 
 			},
 		} end
 	}
-	use { 'doums/darcula' }
-	use { 'm6vrm/gruber.vim' }
-	use { 'CreaturePhil/vim-handmade-hero' }
-	use { 'deparr/tairiki.nvim' }
-	use { 'danilo-augusto/vim-afterglow' }
-	use { 'andreasvc/vim-256noir' }
-	use { 'bhrown/brown.vim' }
-	use { 'phha/zenburn.nvim' }
-	use { 'Nequo/palefire-nvim' }
 	use { 'chriskempson/base16-vim' }
 
 	--use { 
